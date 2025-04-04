@@ -1,4 +1,6 @@
 import { Component, HostBinding } from '@angular/core';
+import { Article } from '../../models/article.models';
+import  { Title } from '@angular/platform-browser';     
 
 @Component({
   selector: 'app-article',
@@ -8,20 +10,17 @@ import { Component, HostBinding } from '@angular/core';
 })
 export class ArticleComponent {
   @HostBinding('attr.class') cssClass = 'card';
-  votes: number;
-  title: string;
-  link: string;
-  constructor() {
-    this.title = 'Angular 2';
-    this.link = 'http://angular.io';
-    this.votes = 10;
+  article: Article;
+  
+  constructor(title: string, link: string, votes?: number) {
+    this.article = new Article(title, link, votes);
   }
   voteUp():Boolean {
-    this.votes += 1;
+    this.article.votes += 1;
     return false;
   }
   voteDown():Boolean {
-    this.votes -= 1;
+    this.article.votes -= 1;
     return false;
   }
   ngOnInit() { }
